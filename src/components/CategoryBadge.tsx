@@ -11,10 +11,10 @@ export const CategoryBadge = ({ category, size = "sm", className }: CategoryBadg
   return (
     <span
       className={cn(
-        "inline-flex items-center font-medium text-white rounded-md transition-all",
+        "inline-flex items-center font-medium text-white rounded-full transition-all duration-200",
         getCategoryColor(category),
-        size === "sm" ? "px-2 py-0.5 text-xs" : "px-2.5 py-1 text-sm",
-        "hover:opacity-90",
+        size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3 py-1 text-sm",
+        "hover:opacity-90 hover:scale-105",
         className
       )}
     >

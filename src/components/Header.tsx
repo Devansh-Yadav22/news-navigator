@@ -1,107 +1,61 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Moon, Sun, ChevronDown, Newspaper } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Moon, Sun, Newspaper, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { REGIONS, CATEGORIES, RegionId } from "@/lib/constants";
+import { REGIONS, CATEGORIES, RegionId, CategoryId } from "@/lib/constants";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface HeaderProps {
-  selectedRegion: RegionId;
-  onRegionChange: (region: RegionId) => void;
+  onRegionSelect?: (region: RegionId) => void;
+  selectedRegion?: RegionId | null;
 }
 
-export const Header = ({ selectedRegion, onRegionChange }: HeaderProps) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export const Header = ({ onRegionSelect, selectedRegion }: HeaderProps) => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const currentRegion = REGIONS.find(r => r.id === selectedRegion);
+  const handleRegionClick = (region: RegionId) => {
+    if (onRegionSelect) {
+      onRegionSelect(region);
+    }
+    navigate(`/news/${region}`);
+    setMobileMenuOpen(false);
+  };
+
+  const handleCategoryClick = (category: CategoryId) => {
+    navigate(`/category/${category}`);
+    setMobileMenuOpen(false);
+  };
+
+  const mainCategories = CATEGORIES.slice(0, 4); // Politics, Economy, Geopolitics, Security
 
   return (
-    <header className="sticky top-0 z-50 glass border-b">
+    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container">
-        <div className="flex h-16 items-center justify-between gap-4">
-          {/* Logo */}
+        {/* Top Bar - Logo and Theme Toggle */}
+        <div className="flex h-14 items-center justify-between">
           <Link 
             to="/" 
-            className="flex items-center gap-2 font-serif text-xl font-bold tracking-tight hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2.5 group"
           >
-            <Newspaper className="h-6 w-6 text-primary" />
-            <span className="hidden sm:inline">News Platform</span>
+            <div className="relative">
+              <Newspaper className="h-7 w-7 text-primary transition-transform duration-300 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-primary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+            <span className="font-serif text-xl font-bold tracking-tight hidden sm:inline transition-colors duration-200 group-hover:text-primary">
+              News Platform
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {CATEGORIES.slice(0, 6).map(category => (
-              <Link
-                key={category.id}
-                to={`/category/${category.id}`}
-                className={cn(
-                  "nav-link px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors",
-                  location.pathname === `/category/${category.id}` && "active text-foreground"
-                )}
-              >
-                {category.name}
-              </Link>
-            ))}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="nav-link px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
-                  More
-                  <ChevronDown className="h-4 w-4" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-popover">
-                {CATEGORIES.slice(6).map(category => (
-                  <DropdownMenuItem key={category.id} asChild>
-                    <Link to={`/category/${category.id}`}>{category.name}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </nav>
-
-          {/* Right Side Controls */}
           <div className="flex items-center gap-2">
-            {/* Region Selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2">
-                  <span className="text-lg">{currentRegion?.flag}</span>
-                  <span className="hidden sm:inline text-sm">{currentRegion?.name}</span>
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-popover">
-                {REGIONS.map(region => (
-                  <DropdownMenuItem
-                    key={region.id}
-                    onClick={() => onRegionChange(region.id)}
-                    className={cn(
-                      "gap-2 cursor-pointer",
-                      selectedRegion === region.id && "bg-accent"
-                    )}
-                  >
-                    <span className="text-lg">{region.flag}</span>
-                    <span>{region.name}</span>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="h-9 w-9"
+              className="h-9 w-9 liquid-button"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -115,7 +69,7 @@ export const Header = ({ selectedRegion, onRegionChange }: HeaderProps) => {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden h-9 w-9"
+              className="md:hidden h-9 w-9 liquid-button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -123,28 +77,108 @@ export const Header = ({ selectedRegion, onRegionChange }: HeaderProps) => {
             </Button>
           </div>
         </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block pb-3">
+          {/* Region Bar */}
+          <div className="flex items-center gap-1 mb-2">
+            <span className="text-xs font-medium text-muted-foreground mr-2 uppercase tracking-wider">Regions</span>
+            <div className="flex items-center gap-1">
+              {REGIONS.map((region) => (
+                <button
+                  key={region.id}
+                  onClick={() => handleRegionClick(region.id)}
+                  className={cn(
+                    "liquid-nav-item px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                    "hover:bg-primary/10 hover:text-primary",
+                    selectedRegion === region.id || location.pathname === `/news/${region.id}`
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  <span className="mr-1.5">{region.flag}</span>
+                  {region.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Category Bar */}
+          <div className="flex items-center gap-1">
+            <span className="text-xs font-medium text-muted-foreground mr-2 uppercase tracking-wider">Topics</span>
+            <div className="flex items-center gap-1">
+              {mainCategories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleCategoryClick(category.id)}
+                  className={cn(
+                    "liquid-nav-item px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                    "hover:bg-accent hover:text-accent-foreground",
+                    location.pathname === `/category/${category.id}`
+                      ? "bg-secondary text-secondary-foreground font-semibold"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </nav>
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t bg-background animate-fade-in">
-          <nav className="container py-4 flex flex-col gap-1">
-            {CATEGORIES.map(category => (
-              <Link
-                key={category.id}
-                to={`/category/${category.id}`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "px-4 py-3 text-sm font-medium rounded-lg hover:bg-accent transition-colors",
-                  location.pathname === `/category/${category.id}` && "bg-accent text-primary"
-                )}
-              >
-                {category.name}
-              </Link>
-            ))}
-          </nav>
+      <div 
+        className={cn(
+          "md:hidden overflow-hidden transition-all duration-300 ease-out",
+          mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="container py-4 border-t bg-background/95 backdrop-blur">
+          {/* Mobile Regions */}
+          <div className="mb-4">
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Regions</span>
+            <div className="flex flex-wrap gap-2">
+              {REGIONS.map((region) => (
+                <button
+                  key={region.id}
+                  onClick={() => handleRegionClick(region.id)}
+                  className={cn(
+                    "liquid-nav-item px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                    selectedRegion === region.id || location.pathname === `/news/${region.id}`
+                      ? "bg-primary text-primary-foreground shadow-lg"
+                      : "bg-secondary text-secondary-foreground"
+                  )}
+                >
+                  <span className="mr-1.5">{region.flag}</span>
+                  {region.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Categories */}
+          <div>
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Topics</span>
+            <div className="flex flex-wrap gap-2">
+              {mainCategories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleCategoryClick(category.id)}
+                  className={cn(
+                    "liquid-nav-item px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                    location.pathname === `/category/${category.id}`
+                      ? "bg-secondary text-secondary-foreground font-semibold"
+                      : "bg-muted text-muted-foreground"
+                  )}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
