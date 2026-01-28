@@ -2,50 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* News Platform Design System */
+/* News Platform Design System - Refined Slate/Indigo Theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 0 0% 98%;
-    --foreground: 222 47% 11%;
+    /* Refined Light Theme - Warm Slate */
+    --background: 210 20% 98%;
+    --foreground: 224 71% 4%;
     
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --card-hover: 0 0% 99%;
+    --card-foreground: 224 71% 4%;
+    --card-hover: 210 20% 99%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 224 71% 4%;
     
-    /* Primary - Royal Blue */
-    --primary: 224 76% 48%;
+    /* Primary - Deep Indigo */
+    --primary: 243 75% 59%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 224 76% 42%;
+    --primary-hover: 243 75% 52%;
     
-    --secondary: 215 28% 95%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 4%;
     
-    --muted: 215 28% 95%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
     
-    --accent: 215 28% 95%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 243 75% 97%;
+    --accent-foreground: 243 75% 59%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 224 76% 48%;
+    --ring: 243 75% 59%;
     
-    --radius: 0.625rem;
+    --radius: 0.75rem;
     
-    /* Category Colors */
-    --category-breaking: 0 84% 60%;
-    --category-finance: 142 76% 36%;
+    /* Category Colors - Vibrant & Distinct */
+    --category-politics: 243 75% 59%;
+    --category-economy: 152 76% 36%;
+    --category-geopolitics: 25 95% 53%;
+    --category-security: 0 84% 60%;
     --category-technology: 263 70% 50%;
-    --category-world: 25 95% 53%;
+    --category-finance: 142 76% 36%;
     --category-sports: 199 89% 48%;
     --category-entertainment: 330 81% 60%;
     --category-science: 173 80% 40%;
@@ -53,79 +55,83 @@
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-glow: 0 0 20px rgba(29, 78, 216, 0.15);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+    --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
     
     /* Sidebar */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-background: 220 14% 96%;
+    --sidebar-foreground: 224 71% 4%;
+    --sidebar-primary: 243 75% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 243 75% 97%;
+    --sidebar-accent-foreground: 243 75% 59%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 224 76% 48%;
+    --sidebar-ring: 243 75% 59%;
   }
 
   .dark {
-    --background: 222 47% 3%;
-    --foreground: 210 40% 98%;
+    /* Premium Dark Theme - Deep Space */
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
     
-    --card: 222 47% 5%;
-    --card-foreground: 210 40% 98%;
-    --card-hover: 222 47% 7%;
+    --card: 224 71% 6%;
+    --card-foreground: 210 20% 98%;
+    --card-hover: 224 71% 8%;
     
-    --popover: 222 47% 5%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 71% 6%;
+    --popover-foreground: 210 20% 98%;
     
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 5%;
-    --primary-hover: 217 91% 70%;
+    /* Primary - Luminous Indigo */
+    --primary: 243 75% 67%;
+    --primary-foreground: 224 71% 4%;
+    --primary-hover: 243 75% 75%;
     
     --secondary: 217 33% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary-foreground: 210 20% 98%;
     
     --muted: 217 33% 12%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 220 9% 60%;
     
-    --accent: 217 33% 15%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 243 40% 15%;
+    --accent-foreground: 243 75% 67%;
     
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 210 20% 98%;
     
     --border: 217 33% 15%;
     --input: 217 33% 15%;
-    --ring: 217 91% 60%;
+    --ring: 243 75% 67%;
     
-    /* Dark mode category colors - slightly brighter */
-    --category-breaking: 0 84% 65%;
-    --category-finance: 142 76% 45%;
+    /* Dark mode category colors - Luminous */
+    --category-politics: 243 75% 67%;
+    --category-economy: 152 76% 45%;
+    --category-geopolitics: 25 95% 60%;
+    --category-security: 0 84% 65%;
     --category-technology: 263 70% 60%;
-    --category-world: 25 95% 58%;
+    --category-finance: 142 76% 45%;
     --category-sports: 199 89% 55%;
     --category-entertainment: 330 81% 65%;
     --category-science: 173 80% 50%;
     --category-health: 340 82% 58%;
     
-    /* Dark mode shadows */
+    /* Dark mode shadows - Subtle glow */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
-    --shadow-glow: 0 0 30px rgba(96, 165, 250, 0.2);
+    --shadow-glow: 0 0 40px rgba(129, 140, 248, 0.2);
     
     /* Sidebar dark */
-    --sidebar-background: 222 47% 5%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217 33% 12%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-background: 224 71% 6%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 243 75% 67%;
+    --sidebar-primary-foreground: 224 71% 4%;
+    --sidebar-accent: 243 40% 15%;
+    --sidebar-accent-foreground: 243 75% 67%;
     --sidebar-border: 217 33% 15%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-ring: 243 75% 67%;
   }
 }
 
@@ -150,13 +156,73 @@
 }
 
 @layer components {
+  /* Apple Liquid UI Effects */
+  .liquid-nav-item {
+    @apply relative overflow-hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .liquid-nav-item::before {
+    content: '';
+    @apply absolute inset-0 rounded-full opacity-0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.15), transparent 60%);
+    transition: opacity 0.4s ease;
+  }
+
+  .liquid-nav-item:hover::before {
+    opacity: 1;
+  }
+
+  .liquid-nav-item:hover {
+    transform: translateY(-1px);
+  }
+
+  .liquid-nav-item:active {
+    transform: scale(0.97);
+  }
+
+  .liquid-button {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .liquid-button::after {
+    content: '';
+    @apply absolute inset-0 rounded-lg opacity-0;
+    background: radial-gradient(circle at center, hsl(var(--primary) / 0.1), transparent 70%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.8);
+  }
+
+  .liquid-button:hover::after {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  /* Sidebar Items */
+  .sidebar-item {
+    @apply relative overflow-hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-item::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0;
+    background: linear-gradient(90deg, hsl(var(--primary) / 0.1), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-item:hover::before {
+    opacity: 1;
+  }
+
   /* Article Card Hover Effects */
   .article-card {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-400 ease-out;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .article-card:hover {
-    @apply scale-[1.015];
+    @apply scale-[1.02];
     box-shadow: var(--shadow-xl);
   }
 
@@ -181,10 +247,12 @@
   }
 
   /* Category Badges */
-  .badge-breaking { background-color: hsl(var(--category-breaking)); }
-  .badge-finance { background-color: hsl(var(--category-finance)); }
+  .badge-politics { background-color: hsl(var(--category-politics)); }
+  .badge-economy { background-color: hsl(var(--category-economy)); }
+  .badge-geopolitics { background-color: hsl(var(--category-geopolitics)); }
+  .badge-security { background-color: hsl(var(--category-security)); }
   .badge-technology { background-color: hsl(var(--category-technology)); }
-  .badge-world { background-color: hsl(var(--category-world)); }
+  .badge-finance { background-color: hsl(var(--category-finance)); }
   .badge-sports { background-color: hsl(var(--category-sports)); }
   .badge-entertainment { background-color: hsl(var(--category-entertainment)); }
   .badge-science { background-color: hsl(var(--category-science)); }
@@ -225,11 +293,11 @@
 
   /* Glass Effect */
   .glass {
-    @apply backdrop-blur-lg bg-background/80 border border-border/50;
+    @apply backdrop-blur-xl bg-background/90 border border-border/50;
   }
 
   .dark .glass {
-    @apply bg-background/70;
+    @apply bg-background/80;
   }
 
   /* Hero Gradient Overlay */
@@ -274,7 +342,7 @@
   }
 
   .btn-glow:hover {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.35);
   }
 
   /* Focus Visible */
@@ -284,6 +352,11 @@
 }
 
 @layer utilities {
+  /* Duration utilities */
+  .duration-400 {
+    transition-duration: 400ms;
+  }
+
   /* Clamp Typography */
   .text-clamp-hero {
     font-size: clamp(2rem, 5vw, 3.5rem);

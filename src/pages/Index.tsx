@@ -1,26 +1,30 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { TrendingSection } from "@/components/TrendingSection";
 import { ArticleGrid } from "@/components/ArticleGrid";
 import { Footer } from "@/components/Footer";
-import { MOCK_ARTICLES, RegionId } from "@/lib/constants";
+import { MOCK_ARTICLES } from "@/lib/constants";
 
 const Index = () => {
-  const [selectedRegion, setSelectedRegion] = useState<RegionId>("global");
-
-  const filteredArticles = useMemo(() => {
-    if (selectedRegion === "global") return MOCK_ARTICLES;
-    return MOCK_ARTICLES.filter(article => article.region === selectedRegion);
-  }, [selectedRegion]);
-
-  const heroArticle = filteredArticles.find(a => a.isBreaking) || filteredArticles[0];
-  const trendingArticles = filteredArticles.filter(a => a.isTrending).slice(0, 5);
-  const remainingArticles = filteredArticles.filter(a => a.id !== heroArticle?.id);
+  const heroArticle = useMemo(() => 
+    MOCK_ARTICLES.find(a => a.isBreaking) || MOCK_ARTICLES[0], 
+    []
+  );
+  
+  const trendingArticles = useMemo(() => 
+    MOCK_ARTICLES.filter(a => a.isTrending).slice(0, 5), 
+    []
+  );
+  
+  const remainingArticles = useMemo(() => 
+    MOCK_ARTICLES.filter(a => a.id !== heroArticle?.id), 
+    [heroArticle]
+  );
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header selectedRegion={selectedRegion} onRegionChange={setSelectedRegion} />
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
 
       <main className="flex-1 container py-6 lg:py-10">
         {/* Hero Section */}
