@@ -13,11 +13,17 @@ export const ArticleCard = ({ article, variant = "default" }: ArticleCardProps) 
 
   return (
     <article
-      className={cn(
-        "article-card group relative bg-card rounded-lg border overflow-hidden",
-        isFeatured ? "md:col-span-2 lg:col-span-2" : ""
-      )}
-    >
+  onMouseMove={(e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--y", `${e.clientY - rect.top}px`);
+  }}
+  className={cn(
+    "article-card group relative bg-card rounded-lg border overflow-hidden glow-hover transition-shadow",
+    isFeatured ? "md:col-span-2 lg:col-span-2" : ""
+  )}
+>
+
       <a
         href={article.url}
         target="_blank"
