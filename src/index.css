@@ -406,3 +406,34 @@
     @apply bg-muted-foreground/50;
   }
 }
+
+/* ===== Cursor Glow Hover Effect ===== */
+
+.glow-hover::before {
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 260px;
+  height: 260px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-hover:hover::before {
+  opacity: 1;
+}
+
+/* lift + depth polish */
+
+.glow-hover:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
